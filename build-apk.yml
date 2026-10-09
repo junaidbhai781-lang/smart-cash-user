@@ -1,0 +1,123 @@
+name: Build APK
+
+# Release (signed) APK for Uptodown.
+# Run: Actions -> Build APK -> Run workflow -> fill version code (har baar pichle se bada) -> Run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "Version code (whole number, har naye upload par pichle se bada: 2, 3, 4...)"
+        required: true
+        default: "2"
+      version_name:
+        description: "Version name (dikhne wala, jaise 1.1.0)"
+        required: true
+        default: "1.1.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check signing secrets
+        env:
+          KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          missing=0
+          [ -z "$KS_B64" ]   && echo "::error::Secret KEYSTORE_BASE64 missing"   && missing=1
+          [ -z "$KS_PASS" ]  && echo "::error::Secret KEYSTORE_PASSWORD missing" && missing=1
+          [ -z "$KS_ALIAS" ] && echo "::error::Secret KEY_ALIAS missing"         && missing=1
+          [ "$missing" = "1" ] && echo "Settings -> Secrets and variables -> Actions mein 3 secrets add karo (STEPS file dekho)." && exit 1
+          exit 0
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: ''
+
+      - name: Prepare www folder
+        run: |
+          mkdir -p www
+          cp index.html style.css script.js native.js APK_Logo_512x512_Transparent.png www/
+
+      - name: Install Capacitor
+        run: npm install
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Set app logo (APK icon + splash)
+        run: |
+          pip install pillow
+          RES=android/app/src/main/res
+          rm -rf $RES/mipmap-anydpi-v26
+          python3 make_icons.py APK_Logo_512x512_Transparent.png $RES "#0A2A7A"
+
+      - name: Set version
+        env:
+          VC: ${{ inputs.version_code }}
+          VN: ${{ inputs.version_name }}
+        run: |
+          case "$VC" in ''|*[!0-9]*) echo "::error::version_code sirf number hona chahiye"; exit 1;; esac
+          F=android/app/build.gradle
+          sed -i -E "s/versionCode [0-9]+/versionCode $VC/; s/versionName \"[^\"]*\"/versionName \"$VN\"/" $F
+          grep -q "versionCode $VC" $F || { echo "::error::versionCode set nahi hua"; exit 1; }
+          grep -E "versionCode|versionName" $F
+
+      - name: Sync web files
+        run: npx cap sync android
+
+      - name: Build release APK (unsigned)
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Align and sign APK
+        env:
+          KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          set -e
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* 2>/dev/null | sort -V | tail -1)
+          if [ -z "$BT" ]; then
+            yes | sdkmanager "build-tools;35.0.0" >/dev/null
+            BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          fi
+          echo "build-tools: $BT"
+          echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          IN=android/app/build/outputs/apk/release/app-release-unsigned.apk
+          OUT=smart-cash-user-release.apk
+          "$BT/zipalign" -f -p 4 "$IN" "$RUNNER_TEMP/aligned.apk"
+          "$BT/apksigner" sign --ks "$RUNNER_TEMP/release.jks" --ks-key-alias "$KS_ALIAS" \
+            --ks-pass env:KS_PASS --key-pass env:KS_PASS --out "$OUT" "$RUNNER_TEMP/aligned.apk"
+          "$BT/apksigner" verify --verbose "$OUT" | head -8
+          rm -f "$RUNNER_TEMP/release.jks"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: smart-cash-user-release-apk
+          path: smart-cash-user-release.apk
