@@ -1,0 +1,24 @@
+SMART CASH USER - APK BUILD STEPS (GitHub Actions)
+
+A) TEST APK (koi secret nahi chahiye)
+1. Saari files repo ke root me upload karo. Folder .github/workflows/ (andar 2 yml files) bhi.
+   NOTE: .github "hidden" folder hai - phone/file manager me hidden files ON karo.
+2. GitHub repo -> Actions -> "Build Debug APK (test)" -> Run workflow.
+3. Complete hone par run kholo -> neeche Artifacts -> smart-cash-user-debug-apk download karo.
+
+B) RELEASE APK (store upload ke liye) - ek baar keystore banao
+1. Keystore banao (PC/Termux par, Java chahiye):
+   keytool -genkeypair -v -keystore release.jks -alias smartcash -keyalg RSA -keysize 2048 -validity 10000
+   (store password aur key password SAME rakho - workflow dono ke liye ek hi password use karta hai)
+2. Base64 banao:   base64 -w0 release.jks
+3. Repo -> Settings -> Secrets and variables -> Actions -> New repository secret:
+   KEYSTORE_BASE64   = upar wali base64 line
+   KEYSTORE_PASSWORD = keystore ka password
+   KEY_ALIAS         = smartcash
+4. Actions -> "Build APK" -> Run workflow -> version_code (1, 2, 3... har baar bada) + version_name -> Run.
+5. Artifacts -> smart-cash-user-release-apk -> download. Yahi APK store par upload karo.
+
+ZARURI
+- release.jks file aur password ka backup rakho. Kho gaya to app ka update kabhi nahi aa payega.
+- release.jks ko GitHub repo me upload MAT karo.
+- Har naye upload par version_code pichle se bada hona chahiye.
