@@ -1,4 +1,0 @@
-/* Embedded inside Smart Cash (Game tab): no bottom nav / extra spacing of its own */
-:root{--nav-h:0px}
-#app{max-width:none;box-shadow:none}
-.hs{padding-bottom:20px}
