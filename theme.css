@@ -1,0 +1,225 @@
+/* =====================================================================
+   Super77Pro v1.2.0 · Premium gold theme layer.
+   Loaded LAST: it only adds depth, metal, light and motion on top of style.css / games.css.
+   No layout metrics (sizes, grids, paddings) are changed here, so existing layouts and tests keep working.
+   1 tokens · 2 global polish · 3 home · 4 game shell · 5 Lucky777 · 6 wheel · 7 GreedyBaby · 8 win FX · 9 motion
+   ===================================================================== */
+
+/* 1 ─ tokens ─────────────────────────────────────────────────────── */
+:root{
+ --g-hi:#fff6c0;--g-1:#ffe28a;--g-2:#f5c04a;--g-3:#c98a14;--g-4:#8a5600;--g-5:#4a2a00;
+ --metal:linear-gradient(180deg,#fff3b0 0%,#ffd45a 28%,#e0a21c 58%,#a86a06 100%);
+ --metal-rim:linear-gradient(135deg,#fff3b0,#f5c04a 25%,#8a5600 50%,#ffe28a 75%,#b9770a);
+ --btn-gold:linear-gradient(180deg,#fff0a6 0%,#ffd24a 30%,#eaa51c 70%,#c98a14 100%);
+ --gloss:linear-gradient(180deg,#ffffff55,#ffffff00 55%);
+}
+
+/* 2 ─ global polish ──────────────────────────────────────────────── */
+body{background:radial-gradient(760px 460px at 50% -10%,#2a3a8f 0,transparent 70%),radial-gradient(520px 380px at 100% 100%,#6b4a0f40,transparent 70%),radial-gradient(420px 300px at 0% 60%,#3a1a7a30,transparent 70%),var(--bg-0)}
+/* pressed feedback for touch + mouse (class .pr is added by fx.js for 160 ms) */
+button{transition:transform var(--t-fast),filter var(--t-fast),box-shadow var(--t-fast)}
+button.pr:not(:disabled){filter:brightness(1.12)}
+@media (hover:hover){.btn:hover:not(:disabled),.plus:hover,.ban button:hover,.rbtn:hover:not(:disabled),.chip:hover,.bx:hover,.fd:hover{filter:brightness(1.08)}}
+.btn.big,.g .pl,.ban button,.plus{background:var(--btn-gold);border:1px solid #fff0a699;text-shadow:0 1px 0 #fff6c088}
+.btn.big::before,.g .pl::before,.ban button::before{content:"";position:absolute;inset:0;background:var(--gloss);border-radius:inherit;pointer-events:none}
+.btn.big,.ban button{position:relative;overflow:hidden}
+/* a slow light sweep over the main gold buttons */
+.btn.big::after,.g .pl::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,#ffffffaa,transparent);transform:skewX(-20deg);animation:sweep 4.2s ease-in-out infinite;pointer-events:none}
+@keyframes sweep{0%,55%{left:-60%}85%,100%{left:130%}}
+.stat>div,.bsum>span,.hist,.betv{background:linear-gradient(180deg,#121c4acc,#0a1130dd);border:1px solid #f5c04a40;box-shadow:inset 0 1px 0 #ffffff14,0 2px 6px #0005}
+.wal{background:linear-gradient(180deg,#0b1334,#050a22);border:1px solid #f5c04a77;box-shadow:inset 0 1px 0 #ffffff1a,0 0 12px #f5c04a22}
+.coin{background:radial-gradient(circle at 35% 30%,#fff7c4,#ffd24a 45%,#c98a14);box-shadow:0 0 0 2px #a8680a inset,0 1px 3px #0008}
+.bal{text-shadow:0 0 10px #f5c04a44}
+.x{background:linear-gradient(180deg,#223072,#141d4c);border:1px solid #f5c04a55;box-shadow:inset 0 1px 0 #ffffff1f,0 2px 4px #0006}
+.hi:first-child{box-shadow:0 0 0 2px #f5c04a,0 0 10px #f5c04a88}
+.tbar{box-shadow:inset 0 1px 3px #0008}
+.tbar i{background:linear-gradient(90deg,#c98a14,#ffe28a);box-shadow:0 0 8px #f5c04a99}
+/* chips: casino-style inner ring + gloss */
+.chip{box-shadow:inset 0 0 0 3px var(--c),inset 0 0 0 5px #ffffff55,inset 0 -6px 10px #0006,inset 0 5px 6px #ffffff33,0 3px 0 #0008}
+.chip.sel{box-shadow:inset 0 0 0 3px var(--c),inset 0 0 0 5px #ffffff88,inset 0 -6px 10px #0006,0 0 0 3px var(--g-2),0 0 16px #f5c04aaa,0 8px 14px #000a}
+.msg{text-shadow:0 1px 6px #0009}
+.msg.win{color:#6dffbb;text-shadow:0 0 12px #1ecb85aa}
+
+/* 3 ─ home ───────────────────────────────────────────────────────── */
+img.av{border-color:transparent;background:var(--metal-rim) border-box;border:2px solid transparent;box-shadow:0 0 0 1px #f5c04a88,0 0 16px #f5c04a55}
+.hb{background:linear-gradient(180deg,#0b1340cc,transparent)}
+.ban{background:linear-gradient(120deg,#0f6b55,#0a2f4a);border:1px solid #f5c04a55;box-shadow:inset 0 1px 0 #ffffff1a,0 4px 14px #0006}
+.sh h3{background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 #000a)}
+.g{border:2px solid transparent;background-clip:padding-box;box-shadow:0 10px 24px #0008,inset 0 1px 0 #ffffff33,inset 0 0 0 1px #ffffff10}
+.g::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;padding:2px;background:var(--metal-rim);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none}
+.g .lg{animation:floaty 3.6s ease-in-out infinite}
+.g.c2 .lg{animation-delay:-1.2s}.g.c3 .lg{animation-delay:-2.4s}
+@keyframes floaty{50%{transform:translateY(-4px)}}
+.g .tagline{background:#00000055;border:1px solid #ffffff22}
+.ez button{background:linear-gradient(180deg,#141d4a,#0c1233);border-color:#f5c04a44}
+.nav{background:linear-gradient(180deg,#0b1236,#050a20);border-top:1px solid #f5c04a66;box-shadow:0 -6px 18px #0008}
+.nav button.on span{background:linear-gradient(180deg,#f5c04a38,#f5c04a14);box-shadow:0 0 12px #f5c04a44}
+.bal2{background:linear-gradient(150deg,#22327a,#0d1538);border:1px solid #f5c04a88;box-shadow:inset 0 1px 0 #ffffff22,0 0 24px #f5c04a22,var(--sh-1)}
+.bal2 b{text-shadow:0 0 18px #f5c04a66}
+
+/* 4 ─ game shell ─────────────────────────────────────────────────── */
+@media (max-width:359px){.gh .wal::after{display:none}}
+.game.on{animation:gin .28s ease-out}
+@keyframes gin{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
+
+/* 5 ─ Lucky777 ───────────────────────────────────────────────────── */
+.cab{background:linear-gradient(180deg,#1f9a58,#0b4527 60%,#082f1b);border:3px solid #f5c04a;box-shadow:0 0 0 3px #6b4300,0 0 0 5px #f5c04a,0 16px 34px #000c,inset 0 0 0 2px #ffffff26,inset 0 -30px 40px #0005}
+.mq b{filter:drop-shadow(0 2px 0 #4a2a00) drop-shadow(0 0 8px #ffd24d66)}
+.bulbs i{background:radial-gradient(circle at 35% 30%,#fff,#ffe9a0 45%,#e0a21c);box-shadow:0 0 8px 1px #ffd24d}
+.rw{background:linear-gradient(#fffdf4,#efdfb8 50%,#fffdf4);border:3px solid #7a4d00;box-shadow:inset 0 8px 16px #000a,inset 0 -6px 12px #0004,0 0 0 2px #f5c04a,0 4px 10px #0008}
+/* glass reflection over the reels */
+.rw::after{content:"";position:absolute;inset:0;z-index:2;border-radius:12px;pointer-events:none;background:linear-gradient(165deg,#ffffff40 0,#ffffff00 32%),linear-gradient(0deg,#0000002e 0,transparent 22%),linear-gradient(180deg,#00000040 0,transparent 20%)}
+.reel{background:linear-gradient(90deg,#00000014,transparent 18%,transparent 82%,#00000014)}
+.reel.spin .cell{filter:blur(1.4px);animation:rs .12s linear infinite}
+.cell.w{background:radial-gradient(circle,#fffbd0,#ffe27a);box-shadow:inset 0 0 0 3px #f5a300,inset 0 0 18px #ffb300aa;animation:pulse .5s 3}
+.cell .ic{filter:drop-shadow(0 3px 2px #0006)}
+.rbtn{background:var(--btn-gold);color:var(--g-5);box-shadow:0 4px 0 #8a5600,0 6px 10px #0006;border:1px solid #fff0a688}
+.rbtn:active:not(:disabled){box-shadow:0 1px 0 #8a5600}
+.spin{background:linear-gradient(180deg,#fff0a6,#ffc933 35%,#e8960f 80%,#b86f06);letter-spacing:3px;text-shadow:0 1px 0 #fff6c0}
+.spin:disabled{filter:saturate(.5) brightness(.85)}
+.betv b{text-shadow:0 0 12px #f5c04a55}
+
+/* 6 ─ Super77Pro wheel ───────────────────────────────────────────── */
+.wr::before{content:"";position:absolute;inset:-9%;border-radius:50%;z-index:-1;background:radial-gradient(circle,#f5c04a55 0,#f5c04a22 45%,transparent 70%);transition:opacity .4s}
+.wr.spinning::before{animation:halo 1s ease-in-out infinite}
+@keyframes halo{50%{transform:scale(1.07);opacity:.8}}
+.wr{isolation:isolate}
+.wheel{filter:drop-shadow(0 12px 16px #000c) drop-shadow(0 0 14px #f5c04a44)}
+.wgloss{position:absolute;inset:0;border-radius:50%;z-index:1;pointer-events:none;background:radial-gradient(ellipse 60% 42% at 36% 22%,#ffffff55,#ffffff00 70%),radial-gradient(circle,transparent 58%,#00000040 100%)}
+.lt{fill:#fff6c8;stroke:#ffcf4a;stroke-width:.7}
+.dv{stroke:#ffe28a;stroke-opacity:.75;stroke-width:1}
+.ptr{background:linear-gradient(#fff3b0,#e0a21c 60%,#8a5600);filter:drop-shadow(0 3px 3px #000a) drop-shadow(0 0 6px #f5c04a88);z-index:3}
+.wr.spinning .ptr{animation:flap .16s ease-in-out infinite alternate;transform-origin:50% 25%}
+@keyframes flap{from{transform:translateX(-50%) rotate(-6deg)}to{transform:translateX(-50%) rotate(5deg)}}
+.hub{background:radial-gradient(circle at 35% 30%,#fff7c4,#f0b21a 55%,#8a4c00);border:4px solid #fff3c4;box-shadow:0 0 0 3px #8a5600,0 0 0 5px #f5c04a,0 6px 12px #000a,inset 0 -6px 10px #0004,inset 0 4px 6px #ffffff77;z-index:4}
+.wg.wn path{filter:brightness(1.45) saturate(1.25)}
+.bx{border-width:2px;box-shadow:0 4px 0 #0008,0 8px 14px #0006,inset 0 1px 0 #ffffff55,inset 0 -10px 16px #0003}
+.bx::before{content:"";position:absolute;left:6px;right:6px;top:3px;height:38%;border-radius:12px 12px 40px 40px;background:var(--gloss);pointer-events:none}
+.bx.k-seven{border-color:var(--g-2);box-shadow:0 4px 0 #0008,0 0 14px #8e48e688,inset 0 1px 0 #ffffff55}
+.bx.has{border-color:var(--g-1);box-shadow:0 0 0 2px #f5c04a99,0 0 16px #f5c04a77,0 4px 0 #0008}
+.bx.win{background:radial-gradient(circle at 50% 30%,#fffbd0,#ffd24a 60%,#e0a21c);box-shadow:0 0 0 3px #fff,0 0 28px #ffd24d,0 4px 0 #0008}
+.bx .t{background:#000000aa;border:1px solid #f5c04a55;color:var(--g-1)}
+
+/* 7 ─ GreedyBaby ─────────────────────────────────────────────────── */
+.ring{background:linear-gradient(#ffe0ac,#e69a46);border:3px solid transparent;background-clip:padding-box;position:relative;box-shadow:0 0 0 3px #8a5600,0 0 0 5px #f5c04a,0 14px 28px #000a,inset 0 2px 0 #fff9,inset 0 -14px 24px #b9611d55}
+.fd{border:3px solid #fff;background:linear-gradient(#fffefa,#ffe6b4);box-shadow:0 4px 0 #b97a2a,0 8px 12px #0004,inset 0 -8px 10px #f0b25a44}
+.fd::before{content:"";position:absolute;left:8%;right:8%;top:4%;height:32%;border-radius:14px 14px 40px 40px;background:linear-gradient(#ffffffaa,#ffffff00);pointer-events:none}
+.fd .e,.fd .m{position:relative}
+.fd.tier3{border-color:#ffd24a;box-shadow:0 4px 0 #b97a2a,0 0 12px #ffb30088,0 8px 12px #0004}
+.fd.hl{border-color:#ffb400;background:radial-gradient(circle,#fffff0,#ffe27a);box-shadow:0 0 0 3px #fff,0 0 26px 4px #ffd24d,0 6px 10px #0005;transform:scale(1.06)}
+.fd.win{background:radial-gradient(circle,#f6fff9,#9ff3cf);box-shadow:0 0 0 3px #fff,0 0 28px #1ecb85,0 4px 0 #0a8a5a}
+.mid{background:radial-gradient(circle at 35% 28%,#ffb27a,#e0561a 55%,#a02e08);border:4px solid #fff3dd;box-shadow:0 0 0 3px #8a5600,0 6px 14px #0008,inset 0 -8px 12px #0004,inset 0 4px 8px #ffffff66}
+.mid.win{box-shadow:0 0 0 3px #8a5600,0 0 0 6px #1ecb85,0 0 24px #1ecb85,0 6px 14px #0008}
+.fd .my{background:linear-gradient(#ff6a5b,#c92a1f)}
+
+/* 8 ─ win effects ────────────────────────────────────────────────── */
+#fx{position:absolute;left:0;top:0;width:100%;height:100%;z-index:40;pointer-events:none}
+.winb{position:absolute;inset:0;z-index:41;display:grid;place-items:center;pointer-events:none;animation:wbin .35s cubic-bezier(.2,1.3,.4,1) both}
+.winb .wb-ray{position:absolute;left:50%;top:50%;width:150vmin;height:150vmin;max-width:760px;max-height:760px;margin:-75vmin 0 0 -75vmin;border-radius:50%;opacity:.0;background:repeating-conic-gradient(from 0deg,#ffe28a55 0 8deg,transparent 8deg 20deg);-webkit-mask:radial-gradient(circle,#000 0,transparent 62%);mask:radial-gradient(circle,#000 0,transparent 62%)}
+.winb.t2 .wb-ray,.winb.t3 .wb-ray{opacity:1;animation:rays 6s linear infinite}
+@keyframes rays{to{transform:rotate(360deg)}}
+.winb .wb-in{position:relative;text-align:center;padding:14px 26px 16px;border-radius:22px;background:linear-gradient(180deg,#1b0f3acc,#06061acc);border:2px solid var(--g-2);box-shadow:0 0 0 3px #6b4300,0 0 36px #f5c04a99,0 14px 30px #000b;animation:wbout .35s ease-in 1.35s both}
+.winb.t2 .wb-in,.winb.t3 .wb-in{animation-delay:2.2s}
+.winb small{display:block;font-size:13px;font-weight:900;letter-spacing:3px;color:var(--g-1)}
+.winb b{display:flex;align-items:center;justify-content:center;gap:8px;font-size:clamp(34px,11vw,48px);line-height:1.1;font-variant-numeric:tabular-nums;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #4a2a00)}
+.winb b .coin{width:.8em;height:.8em;font-size:.55em}
+.winb.t1 small{color:#9dffd0}.winb.t3 .wb-in{border-color:#fff;box-shadow:0 0 0 3px #b9770a,0 0 50px #ffd24d,0 14px 30px #000b}
+@keyframes wbin{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes wbout{to{opacity:0;transform:translateY(-14px) scale(.94)}}
+
+/* 9 ─ motion preferences ─────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+ .btn.big::after,.g .pl::after,.g .lg,.wr.spinning::before,.wr.spinning .ptr,.winb .wb-ray{animation:none!important}
+}
+
+/* 10 ─ Wine & gold premium pass (Lucky777 + GreedyBaby + home) and night-blue wheel ─────── */
+body{background:radial-gradient(760px 460px at 50% -10%,#7a1020 0,transparent 70%),radial-gradient(520px 380px at 100% 100%,#6b4a0f40,transparent 70%),radial-gradient(420px 300px at 0% 60%,#3a1a7a30,transparent 70%),#14040a}
+.hb{background:linear-gradient(180deg,#4a0a1acc,transparent)}
+.nav{background:linear-gradient(180deg,#2a0610,#14030a)}
+.ban{background:linear-gradient(120deg,#6e0f22,#2a0710);border-color:#f5c04a66}
+.hb .who b{background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:19px;letter-spacing:.4px;filter:drop-shadow(0 1px 0 #000a)}
+.c1{background:linear-gradient(135deg,#9a1428,#2a050c);border-color:#f5c04acc;box-shadow:0 8px 22px #9a142844}
+.c1::before{background:radial-gradient(circle at 80% 45%,#ffd86a55,transparent 62%)}
+.c3{background:linear-gradient(135deg,#b8581c,#3a1204);border-color:#ffd48acc;box-shadow:0 8px 22px #b8581c44}
+.c3::before{background:radial-gradient(circle at 50% 28%,#ffd89a55,transparent 60%)}
+.ez button{background:linear-gradient(180deg,#2a0a14,#16040a)}
+.bal2{background:linear-gradient(150deg,#5a1022,#1c050c)}
+
+/* shared dark-wine game chrome (slot + greedy) */
+.g-slot .stat>div,.g-greedy .stat>div,.g-slot .bsum>span,.g-greedy .bsum>span,.g-greedy .hist{background:linear-gradient(#2e0811,#190308);border:1px solid #f5c04a4d;box-shadow:inset 0 1px 0 #ffffff12,0 2px 6px #0007}
+.g-slot .x,.g-greedy .x{background:linear-gradient(#4a0c18,#26060d);border-color:#f5c04a77}
+.g-slot .wal,.g-greedy .wal{background:linear-gradient(#240509,#12030a);border-color:#f5c04a88}
+.game.g-slot{background:radial-gradient(620px 360px at 50% -6%,#9a1428,transparent 70%),linear-gradient(#4a0812,#1c0308 62%,#0c0104)}
+.game.g-greedy{background:radial-gradient(620px 380px at 50% -4%,#a8501a,transparent 70%),linear-gradient(#5a1c08,#2a0c05 60%,#140603)}
+
+/* Lucky777 — dark panel with gold frame, three tall cream reels, gold middle payline, gold SPIN */
+.g-slot .cab{background:linear-gradient(180deg,#2e070d,#140204);border:3px solid #f5c04a;border-radius:26px;box-shadow:0 0 0 2px #7a4a00,0 16px 34px #000c,inset 0 0 40px #000a;padding:12px}
+.g-slot .bulbs{display:none}
+.g-slot .mq{padding:4px 0 10px}
+.g-slot .mq b{font-size:clamp(17px,5.4vw,22px);letter-spacing:3px;font-weight:800;filter:drop-shadow(0 1px 0 #000)}
+.g-slot .mq b::before,.g-slot .mq b::after{content:"★";font-size:.8em;margin:0 8px;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.g-slot .rw{padding:10px;border-radius:22px;background:linear-gradient(#f7f0de,#e3d7b8);border:0;box-shadow:inset 0 0 0 2px #fff9,0 4px 10px #000a}
+.g-slot .rw::before{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;margin-top:-1px;z-index:3;pointer-events:none;background:linear-gradient(90deg,transparent,#f0b020 8%,#f0b020 92%,transparent);box-shadow:0 0 8px #f5c04a}
+.g-slot .rw::after{display:none}
+.g-slot .reels{gap:10px;background:none;overflow:visible;border-radius:0}
+.g-slot .reels::before,.g-slot .reels::after,.g-slot .reel+.reel::before{display:none}
+.g-slot .reel{border-radius:16px;overflow:hidden;border:0;background:linear-gradient(180deg,#8f8878 0,#d4cebf 20%,#fbf9f2 50%,#d4cebf 80%,#8f8878 100%);box-shadow:inset 0 0 0 1px #0003,inset 0 0 16px #0004}
+.g-slot .reel+.reel{border-left:0}
+.g-slot .cell{height:clamp(70px,23vw,100px);font-size:clamp(54px,17.5vw,78px);border:0}
+.g-slot .cell .ic{width:.92em;height:.92em;filter:drop-shadow(0 4px 3px #0005)}
+.g-slot .plov{z-index:4;left:10px;top:10px;width:calc(100% - 20px);height:calc(100% - 20px)}
+.g-slot .plines em{color:#e8c9a0}
+.g-slot .pln{color:#ffe9c8;background:#00000055}
+.g-slot .betv{background:linear-gradient(#240509,#12030a);border:1px solid #f5c04a77;box-shadow:inset 0 3px 8px #000}
+.g-slot .rbtn{background:linear-gradient(#5a0f1d,#2a060d);color:#ffe28a;border:2px solid #f5c04a;box-shadow:0 4px 0 #120204,0 0 12px #f5c04a33,0 8px 10px #0008}
+.g-slot .rbtn:active:not(:disabled){box-shadow:0 1px 0 #120204}
+.g-slot .auto{background:linear-gradient(#3a0a14,#1c050a);color:#ffe9c8;border:1px solid #f5c04a77;box-shadow:0 4px 0 #0c0204,0 6px 10px #0008}
+.g-slot .auto.on{background:var(--btn-gold);color:var(--g-5);box-shadow:0 4px 0 #8a5600,0 0 18px #f5c04a99}
+.g-slot .spin{background:linear-gradient(180deg,#fff0a6,#ffc933 35%,#e8960f 80%,#b86f06);color:#3a1d00;border:1px solid #fff0a6;box-shadow:0 5px 0 #8a5600,0 0 18px #f5c04a66,0 10px 14px #0008;font-size:24px;letter-spacing:3px}
+.g-slot .spin:active:not(:disabled){box-shadow:0 1px 0 #8a5600}
+
+/* Super77Pro — royal-blue wedges, thick gold rim, stage glow, gold-framed blue bet panel */
+.game.g-wheel{background:
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='none'%3E%3Cg fill='%2312206a' opacity='.9'%3E%3Crect x='0' y='60' width='30' height='60'/%3E%3Crect x='34' y='30' width='26' height='90'/%3E%3Crect x='64' y='70' width='40' height='50'/%3E%3Crect x='110' y='20' width='24' height='100'/%3E%3Crect x='140' y='55' width='36' height='65'/%3E%3Crect x='182' y='40' width='30' height='80'/%3E%3Crect x='218' y='75' width='38' height='45'/%3E%3Crect x='262' y='25' width='26' height='95'/%3E%3Crect x='294' y='58' width='34' height='62'/%3E%3Crect x='334' y='35' width='28' height='85'/%3E%3Crect x='366' y='65' width='34' height='55'/%3E%3C/g%3E%3C/svg%3E") bottom/100% 150px no-repeat,
+ radial-gradient(640px 380px at 50% -4%,#5a3ae0cc,transparent 70%),linear-gradient(#1a1460,#0a0f3a 70%,#070a2a)}
+.wr::after{content:"";position:absolute;left:12%;right:12%;bottom:-14px;height:26px;border-radius:50%;background:radial-gradient(ellipse,#f5c04a66,transparent 70%);z-index:-1}
+.wg.wn path{filter:brightness(1.35)}
+.wg path{stroke:#ffffff22;stroke-width:.6}
+.dv{stroke:#ffe28a;stroke-opacity:.9;stroke-width:1.2}
+.bets{padding:10px;border-radius:18px;background:linear-gradient(#f9d86a,#c98a14);box-shadow:0 0 0 2px #6b4300,0 8px 16px #0008,inset 0 2px 0 #fff8;gap:8px}
+.bx,.bx.k-melon,.bx.k-mango,.bx.k-seven{background:linear-gradient(#2fa4f5,#0f5fc0 70%,#0b4aa0);border:2px solid #0a2f7a;box-shadow:inset 0 2px 8px #0007,inset 0 1px 0 #ffffff55;min-height:108px;border-radius:14px}
+.bx.k-seven{background:linear-gradient(#b052f0,#6a1fb4 70%,#4c1488)}
+.bx::before{display:none}
+.bx b{color:#ffe28a;font-size:21px;text-shadow:0 2px 0 #4a2a00,0 0 8px #0008}
+.bx small{color:#cfe8ff}
+.bx .t{background:#06214f99;border:1px solid #7cc0ff55;color:#bfe4ff}
+.bx.has{border-color:#ffe28a;box-shadow:0 0 0 2px #f5c04a,0 0 14px #f5c04a99,inset 0 2px 8px #0007}
+.bx.win{background:radial-gradient(circle at 50% 30%,#fffbd0,#ffd24a 60%,#e0a21c);border-color:#fff;box-shadow:0 0 0 3px #fff,0 0 28px #ffd24d}
+.g-wheel .hist{border-radius:14px;background:linear-gradient(#1c2a8a,#0e1660);border:2px solid #f5c04a88}
+.hist em{color:#ffe28a;text-shadow:0 1px 0 #000a}
+.bx .e{font-size:44px}
+
+/* GreedyBaby — round board: 8 dark-gold tiles around a bear hub (positions set in greedy.js, no CSS trig for old WebViews) */
+.g-greedy .ring{position:relative;display:block;width:100%;max-width:400px;aspect-ratio:1;margin:6px auto 28px;padding:0;gap:0;border:0;border-radius:0;background:none;box-shadow:none}
+.g-greedy .ring::before{content:"";position:absolute;inset:12%;border-radius:50%;border:2px solid #f5c04a2e;box-shadow:inset 0 0 50px #f5c04a14,0 0 30px #00000066}
+.g-greedy .fd{position:absolute;width:22%;height:auto;aspect-ratio:1;margin:-11% 0 0 -11%;border-radius:20px;border:3px solid #f5c04a;background:linear-gradient(#45101a,#1a0408 85%);box-shadow:0 0 12px #f5c04a33,0 6px 10px #0008,inset 0 0 14px #000b;color:#ffe28a}
+.g-greedy .fd::before{display:none}
+.g-greedy .fd:active{transform:scale(.95)}
+.g-greedy .fd .e{font-size:clamp(40px,15vw,66px);display:grid;place-items:center;filter:drop-shadow(0 3px 3px #0008)}
+.g-greedy .fd .e .ic{width:.92em;height:.92em}
+.g-greedy .fd .m,.g-greedy .fd.tier2 .m,.g-greedy .fd.tier3 .m{position:absolute;left:50%;top:100%;margin-top:4px;transform:translateX(-50%);padding:1px 10px;border-radius:99px;background:#0c0204;border:1px solid #f5c04a77;color:#ffe28a;font-size:12px;font-weight:900;line-height:1.35;text-shadow:none;white-space:nowrap}
+.g-greedy .fd.tier3{border-color:#fff3b0;box-shadow:0 0 18px #ffd24d88,0 6px 10px #0008,inset 0 0 14px #000b}
+.g-greedy .fd.has{border-color:#fff3b0;box-shadow:0 0 0 2px #ff8a1a,0 0 16px #ff8a1a99,0 6px 10px #0008,inset 0 0 14px #000b}
+.g-greedy .fd.hl{background:linear-gradient(#a8501a,#5a1c08);border-color:#fff;box-shadow:0 0 0 3px #fff,0 0 30px 6px #ffd24d,0 6px 10px #0006;transform:scale(1.08)}
+.g-greedy .fd.win{background:linear-gradient(#1f7a4d,#0a3a24);border-color:#fff;box-shadow:0 0 0 3px #fff,0 0 30px #1ecb85,0 6px 10px #0008}
+.g-greedy .fd .my{top:-8px;right:-8px}
+.g-greedy .mid{position:absolute;left:50%;top:50%;width:44%;height:auto;aspect-ratio:1;margin:-22% 0 0 -22%;padding:0;overflow:hidden;border-radius:50%;border:3px solid #e0a21c;background:#6a2808;box-shadow:0 0 0 2px #5a3200,0 0 28px #f5c04a44,0 8px 16px #000a}
+.g-greedy .mid::after{display:none}
+.g-greedy .mid .bear{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.g-greedy .mid .mh{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);min-width:54%;padding:2px 8px 3px;text-align:center;border-radius:12px;background:#120204e6;border:1px solid #f5c04acc;line-height:1.1}
+.g-greedy .mid .mh b{display:block;font-size:clamp(16px,5.4vw,22px);color:#ffe28a;text-shadow:none}
+.g-greedy .mid .mh b .ic{width:1.5em;height:1.5em}
+.g-greedy .mid .mh small{display:block;margin:0;font-size:9.5px;letter-spacing:.6px;color:#ffd9a0}
+.g-greedy .mid.win{box-shadow:0 0 0 3px #1ecb85,0 0 28px #1ecb85,0 8px 16px #000a}
+.g-greedy .tbar{height:8px}
+@media (max-width:359px){.g-slot .stat b{font-size:19px}.g-slot .spin{font-size:21px}.g-greedy .fd .m{font-size:11px;padding:0 7px}}
