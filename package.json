@@ -1,0 +1,14 @@
+{
+  "name": "cash-reward",
+  "version": "1.4.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor-firebase/authentication": "latest",
+    "@capacitor/android": "latest",
+    "@capacitor/app": "latest",
+    "@capacitor/browser": "latest",
+    "@capacitor/cli": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/share": "latest"
+  }
+}

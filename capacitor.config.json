@@ -1,0 +1,13 @@
+{
+  "appId": "com.smartcash.user01",
+  "appName": "Cash Reward",
+  "webDir": "www",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": [
+        "google.com"
+      ]
+    }
+  }
+}
