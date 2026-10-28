@@ -1,1 +1,0 @@
-{"appId":"com.smartcash.app","appName":"Smart Cash","webDir":"www","plugins":{"FirebaseAuthentication":{"skipNativeAuth":true,"providers":["google.com"]}}}
