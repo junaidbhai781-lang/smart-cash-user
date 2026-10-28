@@ -1,2 +1,0 @@
-// Firebase web config (public by design). Security = database.rules.json
-const FIREBASE_CONFIG={apiKey:"AIzaSyBSU__zGVNKXRf_kM9mfDlywAlGKxHt2Sk",authDomain:"smart-loot-7a862.firebaseapp.com",databaseURL:"https://smart-loot-7a862-default-rtdb.firebaseio.com",projectId:"smart-loot-7a862",storageBucket:"smart-loot-7a862.firebasestorage.app",messagingSenderId:"294192416760",appId:"1:294192416760:web:3655d851dd9287d84af80d"};
