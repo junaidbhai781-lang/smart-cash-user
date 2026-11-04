@@ -1,0 +1,17 @@
+{
+  "name": "smart-cash-user",
+  "version": "1.1.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/app": "latest",
+    "@capacitor/browser": "latest",
+    "@capacitor/cli": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/share": "latest",
+    "three": "0.158.0"
+  },
+  "scripts": {
+    "postinstall": "node copy-three.js"
+  }
+}
